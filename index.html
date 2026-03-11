@@ -3,269 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Rhythm of Data - Freeform Infographic</title>
+    <title>The Rhythm of Data - Musical Infographic</title>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
-        /* --- 画布背景：粗糙的米色画纸 --- */
+        /* --- 基础画布：粗糙米色网格画纸 --- */
         body {
-            background-color: #f4f1ea; 
+            background-color: #fdfbf7; 
             background-image: 
-                linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px),
-                linear-gradient(0deg, rgba(0,0,0,0.03) 1px, transparent 1px);
-            background-size: 30px 30px;
+                linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 20px 20px; 
             font-family: 'Caveat', cursive;
-            color: #2c3e50;
+            color: #2f3640;
             margin: 0;
-            padding: 20px 0 100px 0;
+            padding: 40px;
             overflow-x: hidden;
+            position: relative; /* 为音乐符号层提供定位基准 */
         }
 
-        /* 加宽画幅，给图表和文字充足的呼吸空间 */
-        .canvas {
-            max-width: 1250px; 
+        /* 全局音乐符号装饰层 (z-index:-1) - 若隐若现，绝不干扰 */
+        body::before {
+            content: "𝄞"; /* G谱号 */
+            position: fixed; top: 10%; left: 5%; font-size: 15em; opacity: 0.03; color: #ff4757; transform: rotate(-15deg); z-index: -1; pointer-events: none;
+        }
+        body::after {
+            content: "♫"; /* 连音符 */
+            position: fixed; bottom: 10%; right: 5%; font-size: 20em; opacity: 0.03; color: #3742fa; transform: rotate(10deg); z-index: -1; pointer-events: none;
+        }
+
+        .poster-container {
+            max-width: 1200px;
             margin: 0 auto;
             position: relative;
         }
 
-        /* --- 纯 CSS 黑胶唱片 (复古深色水印) --- */
+        /* 背景黑胶唱片插图 (保留) */
         .vinyl-record {
             position: absolute;
-            top: -70px;
-            right: -100px;
-            width: 600px;
-            height: 600px;
+            top: -100px;
+            right: -200px;
+            width: 650px;
+            height: 650px;
             background: repeating-radial-gradient(
-                rgba(30, 39, 46, 0.12),
-                rgba(30, 39, 46, 0.12) 8px,
-                rgba(30, 39, 46, 0.22) 9px,
-                rgba(30, 39, 46, 0.22) 18px
+                #1e272e,
+                #1e272e 10px,
+                #2f3640 11px,
+                #2f3640 20px
             );
             border-radius: 50%;
-            z-index: 0; 
-            mix-blend-mode: multiply; 
+            z-index: -1;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.15);
         }
         .vinyl-center {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 180px; height: 180px;
-            background-color: rgba(231, 76, 60, 0.45); 
+            width: 200px; height: 200px;
+            background-color: #ff4757;
             border-radius: 50%;
-            border: 8px solid rgba(244, 241, 234, 0.5); 
+            border: 10px solid #fdfbf7;
         }
 
-        /* --- 标题区 --- */
-        .header-area {
-            text-align: center;
-            margin-bottom: 70px;
-            position: relative;
-            z-index: 10;
-        }
+        /* 标题区：马克笔狂野风格 */
         h1 {
             font-family: 'Permanent Marker', cursive;
-            font-size: 6em;
-            color: #1e272e;
-            transform: rotate(-3deg);
-            margin: 0;
-            letter-spacing: 2px;
-            text-shadow: 5px 5px 0px rgba(255, 71, 87, 0.3);
-        }
-        .authors {
-            font-size: 1.8em;
-            color: #c0392b;
-            font-weight: bold;
-            transform: rotate(2deg);
-            margin-top: -10px;
-        }
-
-        /* --- 图文排版逻辑：移除相互覆盖，改为安全距离并排 --- */
-        .collage-section {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px; /* 图表和文字之间的安全鸿沟 */
+            font-size: 5.5em;
+            color: #2f3640;
+            text-transform: uppercase;
+            transform: rotate(-2deg); 
+            margin: 0 0 10px 0;
+            text-shadow: 4px 4px 0px #7bed9f;
             position: relative;
-            margin-bottom: 90px;
-            z-index: 5; 
         }
         
-        .collage-section:nth-child(odd) .doodle-img { width: 55%; }
-        .collage-section:nth-child(odd) .doodle-text { 
-            width: 45%; 
-            z-index: 10;
-        }
-        
-        .collage-section:nth-child(even) { flex-direction: row-reverse; }
-        .collage-section:nth-child(even) .doodle-img { width: 55%; }
-        .collage-section:nth-child(even) .doodle-text { 
-            width: 45%; 
-            z-index: 10;
-            text-align: right;
+        /* 标题下方的音乐符号点缀 */
+        h1::after {
+            content: "♭ 𝄢 ♯ ♪";
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%) rotate(2deg);
+            font-size: 0.3em;
+            color: #ff4757;
+            opacity: 0.3;
+            letter-spacing: 15px;
         }
 
-        .doodle-img img {
+        .authors {
+            font-size: 1.5em;
+            background-color: transparent;
+            color: #ff4757;
+            border: 3px solid #ff4757;
+            padding: 5px 15px;
+            display: inline-block;
+            transform: rotate(1deg);
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            margin-top: 15px;
+        }
+
+        .big-stat {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 4.5em;
+            color: #3742fa;
+            position: absolute;
+            right: 80px;
+            top: 250px;
+            transform: rotate(15deg);
+        }
+
+        /* 文字摘要：便利贴风格 */
+        .sticky-note {
+            background-color: #ffeaa7;
+            padding: 25px 35px;
+            font-size: 1.4em;
+            line-height: 1.5;
+            width: 85%;
+            margin: 40px 0 60px 0;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            border: 2px solid #2f3640;
+            transform: rotate(-1deg);
+            position: relative;
+        }
+        
+        /* 便利贴底角装饰 */
+        .sticky-note::after {
+            content: "♪";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 2em;
+            color: rgba(47, 54, 100, 0.1);
+            transform: rotate(-20deg);
+        }
+
+        /* 6宫格沉浸式排版 */
+        .charts-wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px 40px;
+            justify-content: center;
+        }
+
+        .seamless-doodle {
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+        }
+        
+        .seamless-doodle:nth-child(1) { transform: rotate(1deg); }
+        .seamless-doodle:nth-child(2) { transform: rotate(-1deg); }
+        .seamless-doodle:nth-child(3) { transform: rotate(1.5deg); }
+        .seamless-doodle:nth-child(4) { transform: rotate(-1.5deg); }
+        .seamless-doodle:nth-child(5) { transform: rotate(0.5deg); }
+        .seamless-doodle:nth-child(6) { transform: rotate(-0.5deg); }
+
+        .seamless-doodle img {
             width: 100%;
             height: auto;
-            filter: drop-shadow(3px 5px 4px rgba(0,0,0,0.15));
+            margin-bottom: 15px;
             mix-blend-mode: multiply;
         }
 
-        /* --- 文字段落：保留大字号和护眼描边 --- */
-        .story-text {
-            font-size: 2.1em; 
-            line-height: 1.35;
-            color: #1e272e; 
-            margin-bottom: 20px;
-            font-weight: 700; 
-            letter-spacing: 0.5px;
-            text-shadow: 
-                2px 2px 0px #f4f1ea, 
-                -2px -2px 0px #f4f1ea, 
-                2px -2px 0px #f4f1ea, 
-                -2px 2px 0px #f4f1ea;
+        /* 荧光笔涂抹标题 */
+        .doodle-text {
+            color: #2f3640;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            font-family: 'Patrick Hand', cursive;
+            margin-top: auto;
+            position: relative;
         }
-        .highlight {
-            background: linear-gradient(180deg, transparent 55%, rgba(255, 234, 167, 0.95) 55%);
-            padding: 0 5px;
-        }
-        .highlight-red {
-            background: linear-gradient(180deg, transparent 55%, rgba(255, 118, 117, 0.65) 55%);
-            padding: 0 5px;
-        }
-
-        /* --- 手写碎纸片表格 --- */
-        .data-scrap {
-            background-color: white;
-            padding: 15px 25px;
-            font-size: 1.4em;
-            box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
-            border: 2px solid #2f3640;
-            border-radius: 2px 15px 3px 25px / 25px 3px 15px 2px;
-            display: inline-block;
-            transform: rotate(-2deg);
-            margin-top: 10px; /* 留出一点顶部距离 */
-        }
-        .data-scrap.tilt-right { transform: rotate(2deg); }
         
-        .data-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            column-gap: 30px;
-            row-gap: 5px;
-            text-align: left;
+        .marker-highlight {
+            background: linear-gradient(180deg, transparent 50%, rgba(123, 237, 159, 0.5) 50%);
+            display: inline;
+            padding: 0 5px;
         }
-        .data-grid span { font-family: 'Permanent Marker', cursive; color: #e74c3c; font-size: 1.1em; }
+        
+        .marker-highlight.red {
+            background: linear-gradient(180deg, transparent 50%, rgba(255, 118, 117, 0.4) 50%);
+        }
 
-        .drawn-arrow { position: absolute; z-index: 10; pointer-events: none; filter: drop-shadow(1px 1px 0px #f4f1ea); }
+        /* --- 融入网格纸的手绘表格 --- */
+        .doodle-table-container {
+            margin-bottom: 20px;
+            padding: 0 10px;
+            position: relative;
+        }
+        
+        /* 表格背景加一个若隐若现的低音谱号点缀 */
+        .doodle-table-container::before {
+            content: "𝄢";
+            position: absolute;
+            top: 20px;
+            right: 0px;
+            font-size: 8em;
+            color: rgba(47, 54, 64, 0.03);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.15em; 
+            color: #2f3640;
+        }
+        th, td {
+            padding: 3px 2px; 
+            text-align: left;
+            border-bottom: 1px dashed #a4b0be;
+        }
+        th {
+            font-family: 'Permanent Marker', cursive;
+            color: #3742fa;
+            font-size: 0.85em;
+            border-bottom: 3px solid #2f3640;
+            padding-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        tr:last-child td { border-bottom: none; }
+        td:nth-child(2), td:nth-child(3) { 
+            font-family: 'Permanent Marker', cursive;
+            font-size: 0.9em;
+            color: #ff4757;
+        }
     </style>
 </head>
 <body>
 
-    <div class="canvas">
-        
+    <div class="poster-container">
         <div class="vinyl-record">
             <div class="vinyl-center"></div>
         </div>
 
         <div class="header-area">
-            <h1>The Rhythm Of Data</h1>
-            <div class="authors">Data Investigated by Yihang, Yiheng, Yiming & Yuyang</div>
+            <h1>The Rhythm<br>Of Data</h1>
+            <div class="authors">Data Investigation //STA107</div>
+            <p style="margin-top: 10px; font-size: 1.2em; color: #747d8c;">Prepared by: Yihang Wu, Yiheng Li, Yiming Wang, Yuyang Wu</p>
         </div>
 
-        <div class="collage-section">
-            <div class="doodle-img">
+        <div class="big-stat">37%<br><span style="font-size:0.3em; color:#2f3640;">is POP!</span></div>
+
+        <div class="sticky-note">
+            <strong>Here's the beat:</strong> Of our 392 songs, the average track runs 3.97 mins (SD=1.26). The distribution is heavily right-skewed, centered around 4-5 minutes, meaning the Empirical Rule doesn't perfectly hold, and several high-end outliers push past the 6-minute mark. Pop absolutely dominates the charts (37%), while Rap barely registers (0.76%). <br><br>
+            Across genres, Classical music boasts the longest and most unpredictable durations, whereas Pop and Rap are tightly packaged around the 3-to-4-minute sweet spot. 
+        </div>
+
+        <div class="charts-wrapper">
+            
+            <div class="seamless-doodle">
                 <img src="plot1_histogram.png" alt="Histogram">
+                <div class="doodle-text"><span class="marker-highlight">1. Right Skewed!</span></div>
             </div>
-            
-            <div class="doodle-text">
-                <p class="story-text">
-                    <span class="highlight-red">1.</span> The song duration distribution is <span class="highlight">right-skewed</span>, centered around 4-5 minutes, with moderate spread and several high-end outliers.
-                </p>
-                <p class="story-text">
-                    <span class="highlight-red">2.</span> The average song duration is 3.97 minutes. Song lengths typically deviate from this mean by about 1.26 minutes.
-                </p>
-                <p class="story-text">
-                    <span class="highlight-red">3.</span> The Empirical Rule <span class="highlight">fails</span>: observed proportions within 1, 2, and 3 SDs miss 68-95-99.7%, confirming the right-skewed shape.
-                </p>
-                
-                <svg class="drawn-arrow" width="100" height="60" style="left: -40px; top: 180px;">
-                    <path d="M 80 10 Q 20 20 10 50" fill="none" stroke="#e74c3c" stroke-width="4" stroke-linecap="round"/>
-                    <path d="M 10 50 L 5 30 M 10 50 L 30 45" fill="none" stroke="#e74c3c" stroke-width="4" stroke-linecap="round"/>
-                </svg>
 
-                <div class="data-scrap">
-                    <div style="font-weight: bold; margin-bottom: 5px; border-bottom: 2px dashed #bdc3c7;">2&3. Summary Stats (mins)</div>
-                    <div class="data-grid">
-                        <div>Min: <span>1.15</span></div>
-                        <div>Max: <span>13.38</span></div>
-                        <div>Q1: <span>3.32</span></div>
-                        <div>Mean: <span style="color:#2980b9;">3.97</span></div>
-                        <div>Median: <span>3.78</span></div>
-                        <div>SD: <span>1.26</span></div>
-                        <div>Q3: <span>4.37</span></div>
-                        <div>n: <span>392</span></div>
-                    </div>
+            <div class="seamless-doodle">
+                <div class="doodle-table-container">
+                    <table>
+                        <tr><th>Metric</th><th>Value (mins)</th></tr>
+                        <tr><td>Min</td><td>0.38</td></tr>
+                        <tr><td>Q1</td><td>3.13</td></tr>
+                        <tr><td>Median</td><td>3.82</td></tr>
+                        <tr><td>Mean</td><td>3.97</td></tr>
+                        <tr><td>Q3</td><td>4.66</td></tr>
+                        <tr><td>Max</td><td>9.47</td></tr>
+                        <tr><td>Std. Dev</td><td>1.26</td></tr>
+                        <tr><td>Count (n)</td><td>392</td></tr>
+                    </table>
                 </div>
+                <div class="doodle-text"><span class="marker-highlight red">2&3. Summary Stats</span></div>
             </div>
-        </div>
 
-        <div class="collage-section">
-            <div class="doodle-img">
+            <div class="seamless-doodle">
                 <img src="plot2_boxplot.png" alt="Boxplot">
+                <div class="doodle-text"><span class="marker-highlight">4. Outliers Alert ⬆️</span></div>
             </div>
-            
-            <div class="doodle-text">
-                <p class="story-text">
-                    <span class="highlight-red">4.</span> <span style="color:#7f8c8d;">[ Waiting for update... ]</span> Wait, look at these high-end outliers! The longest track reaches a whopping 13.38 minutes.
-                </p>
 
-                <svg class="drawn-arrow" width="120" height="80" style="right: -40px; top: 80px;">
-                    <path d="M 10 20 Q 60 10 100 70" fill="none" stroke="#2980b9" stroke-width="4" stroke-linecap="round"/>
-                    <path d="M 100 70 L 80 60 M 100 70 L 105 50" fill="none" stroke="#2980b9" stroke-width="4" stroke-linecap="round"/>
-                </svg>
+            <div class="seamless-doodle">
+                <div class="doodle-table-container">
+                    <table>
+                        <tr><th>Genre</th><th>Count</th><th>%</th></tr>
+                        <tr><td>Pop</td><td>145</td><td>37.0%</td></tr>
+                        <tr><td>Other</td><td>79</td><td>20.2%</td></tr>
+                        <tr><td>R&B</td><td>43</td><td>11.0%</td></tr>
+                        <tr><td>Rock</td><td>42</td><td>10.7%</td></tr>
+                        <tr><td>Indie</td><td>32</td><td>8.2%</td></tr>
+                        <tr><td>HipHop</td><td>29</td><td>7.4%</td></tr>
+                        <tr><td>Class.</td><td>19</td><td>4.9%</td></tr>
+                        <tr><td>Rap</td><td>3</td><td>0.8%</td></tr>
+                    </table>
+                </div>
+                <div class="doodle-text"><span class="marker-highlight red">5a. Genre Freq.</span></div>
             </div>
-        </div>
 
-        <div class="collage-section">
-            <div class="doodle-img">
+            <div class="seamless-doodle">
                 <img src="plot3_barplot.png" alt="Bar Plot">
+                <div class="doodle-text"><span class="marker-highlight">5b. Pop takes the crown!</span></div>
             </div>
-            
-            <div class="doodle-text">
-                <p class="story-text">
-                    <span class="highlight-red">5.</span> Pop <span class="highlight">heavily dominates</span> as the most common song genre (37%), while Rap is the least common, showing highly uneven frequencies.
-                </p>
 
-                <div class="data-scrap tilt-right" style="font-size: 1.2em; column-count: 2; column-gap: 30px;">
-                    <div style="font-weight: bold; border-bottom: 2px dashed #bdc3c7; margin-bottom: 5px; column-span: all;">5a. Genre Freq.</div>
-                    Pop: <span>145 (37%)</span><br>
-                    Other: <span>79 (20%)</span><br>
-                    R&B: <span>43 (11%)</span><br>
-                    Rock: <span>42 (10%)</span><br>
-                    Indie: <span>32 (8%)</span><br>
-                    HipHop: <span>29 (7%)</span><br>
-                    Class.: <span>19 (5%)</span><br>
-                    Rap: <span>3 (0.8%)</span>
-                </div>
+            <div class="seamless-doodle">
+                <img src="plot4_boxplot_genre.png" alt="Boxplot by Genre">
+                <div class="doodle-text"><span class="marker-highlight">6. Classical spans widest!</span></div>
             </div>
+
         </div>
-
-        <div style="position: relative; margin-top: 40px; margin-bottom: 80px; text-align: center; z-index: 10;">
-            <div style="display: inline-block; width: 65%; position: relative;">
-                <img src="plot4_boxplot_genre.png" alt="Boxplot by Genre" style="width: 100%; filter: drop-shadow(3px 5px 4px rgba(0,0,0,0.15)); mix-blend-mode: multiply;">
-                
-                <div style="position: absolute; top: 10%; right: -35%; width: 50%; text-align: left; transform: rotate(2deg);">
-                    <p class="story-text">
-                        <span class="highlight-red">6.</span> <span style="color:#7f8c8d;">[ Waiting for update... ]</span> Across genres, Classical music shows the widest spread and highest median!
-                    </p>
-                    <svg class="drawn-arrow" width="80" height="120" style="left: -40px; bottom: -60px;">
-                        <path d="M 60 10 Q 20 60 10 110" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
-                        <path d="M 10 110 L 0 90 M 10 110 L 30 100" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
-                    </svg>
-                </div>
-            </div>
-        </div>
-
     </div>
 
 </body>
