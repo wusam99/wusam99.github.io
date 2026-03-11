@@ -21,7 +21,7 @@
         }
 
         .canvas {
-            max-width: 1100px;
+            max-width: 1150px; /* 稍微加宽一点画布，给放大的文字更多空间 */
             margin: 0 auto;
             position: relative;
         }
@@ -33,7 +33,6 @@
             right: -150px;
             width: 600px;
             height: 600px;
-            /* 恢复黑胶的深灰黑色，但降低透明度，作为背景底纹 */
             background: repeating-radial-gradient(
                 rgba(30, 39, 46, 0.12),
                 rgba(30, 39, 46, 0.12) 8px,
@@ -42,23 +41,22 @@
             );
             border-radius: 50%;
             z-index: 0; 
-            mix-blend-mode: multiply; /* 叠底魔法：让黑色文字在它上面依然清晰锐利 */
+            mix-blend-mode: multiply; 
         }
         .vinyl-center {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             width: 180px; height: 180px;
-            /* 恢复深红色的中心，使用半透明让文字透出来 */
             background-color: rgba(231, 76, 60, 0.45); 
             border-radius: 50%;
-            border: 8px solid rgba(244, 241, 234, 0.5); /* 融入画纸的边框 */
+            border: 8px solid rgba(244, 241, 234, 0.5); 
         }
 
         /* --- 标题区 --- */
         .header-area {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 70px;
             position: relative;
             z-index: 10;
         }
@@ -84,21 +82,21 @@
             display: flex;
             align-items: center;
             position: relative;
-            margin-bottom: 80px;
+            margin-bottom: 90px;
             z-index: 5; 
         }
         
-        .collage-section:nth-child(odd) .doodle-img { width: 65%; }
+        .collage-section:nth-child(odd) .doodle-img { width: 60%; }
         .collage-section:nth-child(odd) .doodle-text { 
-            width: 45%; 
-            margin-left: -15%; 
+            width: 50%; /* 给文字更多宽度 */
+            margin-left: -10%; /* 减少重叠，防拥挤 */
             z-index: 10;
         }
         
         .collage-section:nth-child(even) { flex-direction: row-reverse; }
-        .collage-section:nth-child(even) .doodle-img { width: 65%; }
+        .collage-section:nth-child(even) .doodle-img { width: 60%; }
         .collage-section:nth-child(even) .doodle-text { 
-            width: 45%; 
+            width: 50%; 
             margin-right: -10%; 
             z-index: 10;
             text-align: right;
@@ -111,20 +109,27 @@
             mix-blend-mode: multiply;
         }
 
-        /* --- 文字段落与便签样式 --- */
+        /* --- 文字段落升级：更大、更清晰、带描边 --- */
         .story-text {
-            font-size: 1.8em;
-            line-height: 1.3;
-            color: #1e272e; /* 极深的文字色，确保在深色唱片上也能看清 */
-            margin-bottom: 15px;
-            font-weight: bold;
+            font-size: 2.1em; /* 字号显著放大 */
+            line-height: 1.35;
+            color: #1e272e; 
+            margin-bottom: 20px;
+            font-weight: 700; /* 加粗 */
+            letter-spacing: 0.5px;
+            /* 纸张颜色描边魔法：让文字压在图片线上也极其清晰！ */
+            text-shadow: 
+                2px 2px 0px #f4f1ea, 
+                -2px -2px 0px #f4f1ea, 
+                2px -2px 0px #f4f1ea, 
+                -2px 2px 0px #f4f1ea;
         }
         .highlight {
-            background: linear-gradient(180deg, transparent 60%, rgba(255, 234, 167, 0.9) 60%);
+            background: linear-gradient(180deg, transparent 55%, rgba(255, 234, 167, 0.95) 55%);
             padding: 0 5px;
         }
         .highlight-red {
-            background: linear-gradient(180deg, transparent 60%, rgba(255, 118, 117, 0.6) 60%);
+            background: linear-gradient(180deg, transparent 55%, rgba(255, 118, 117, 0.65) 55%);
             padding: 0 5px;
         }
 
@@ -150,7 +155,7 @@
         }
         .data-grid span { font-family: 'Permanent Marker', cursive; color: #e74c3c; font-size: 1.1em; }
 
-        .drawn-arrow { position: absolute; z-index: 10; pointer-events: none; }
+        .drawn-arrow { position: absolute; z-index: 10; pointer-events: none; filter: drop-shadow(1px 1px 0px #f4f1ea); }
     </style>
 </head>
 <body>
@@ -171,13 +176,18 @@
                 <img src="plot1_histogram.png" alt="Histogram">
             </div>
             
-            <div class="doodle-text" style="margin-top: -80px;">
+            <div class="doodle-text" style="margin-top: -60px;">
                 <p class="story-text">
-                    1. Most songs hit the 3-4 minute mark. The distribution is heavily <span class="highlight-red">right-skewed</span>. 
-                    Because of this skewness, the Empirical Rule <strong>does not strictly hold</strong>!
+                    <span class="highlight-red">1.</span> The song duration distribution is <span class="highlight">right-skewed</span>, centered around 4-5 minutes, with moderate spread and several high-end outliers.
+                </p>
+                <p class="story-text">
+                    <span class="highlight-red">2.</span> The average song duration is 3.97 minutes. Song lengths typically deviate from this mean by about 1.26 minutes.
+                </p>
+                <p class="story-text">
+                    <span class="highlight-red">3.</span> The Empirical Rule <span class="highlight">fails</span>: observed proportions within 1, 2, and 3 SDs miss 68-95-99.7%, confirming the right-skewed shape.
                 </p>
                 
-                <svg class="drawn-arrow" width="120" height="80" style="left: -80px; top: -10px;">
+                <svg class="drawn-arrow" width="120" height="80" style="left: -100px; top: 80px;">
                     <path d="M 100 10 Q 20 20 10 70" fill="none" stroke="#e74c3c" stroke-width="4" stroke-linecap="round"/>
                     <path d="M 10 70 L 5 50 M 10 70 L 30 65" fill="none" stroke="#e74c3c" stroke-width="4" stroke-linecap="round"/>
                 </svg>
@@ -205,8 +215,7 @@
             
             <div class="doodle-text" style="margin-top: -50px;">
                 <p class="story-text">
-                    4. Wait, look at these <span class="highlight">high-end outliers!</span> 
-                    The longest track reaches a whopping 9.47 minutes.
+                    <span class="highlight-red">4.</span> <span style="color:#7f8c8d;">[ Waiting for update... ]</span> Wait, look at these high-end outliers! The longest track reaches a whopping 9.47 minutes.
                 </p>
 
                 <svg class="drawn-arrow" width="150" height="100" style="right: -80px; top: 40px;">
@@ -223,8 +232,7 @@
             
             <div class="doodle-text">
                 <p class="story-text">
-                    5. <span class="highlight-red">Pop completely dominates</span> the dataset at 37%, 
-                    while Rap barely registers (0.7%).
+                    <span class="highlight-red">5.</span> Pop <span class="highlight">heavily dominates</span> as the most common song genre (37%), while Rap is the least common, showing highly uneven frequencies.
                 </p>
 
                 <div class="data-scrap tilt-right" style="font-size: 1.2em; column-count: 2; column-gap: 30px;">
@@ -245,9 +253,9 @@
             <div style="display: inline-block; width: 70%; position: relative;">
                 <img src="plot4_boxplot_genre.png" alt="Boxplot by Genre" style="width: 100%; filter: drop-shadow(3px 5px 4px rgba(0,0,0,0.15)); mix-blend-mode: multiply;">
                 
-                <div style="position: absolute; top: 5%; right: -15%; width: 40%; text-align: left; transform: rotate(2deg);">
+                <div style="position: absolute; top: 5%; right: -25%; width: 45%; text-align: left; transform: rotate(2deg);">
                     <p class="story-text">
-                        6. Across genres, <span class="highlight">Classical music</span> shows the widest spread and highest median, whereas Pop & Rap are tightly packaged!
+                        <span class="highlight-red">6.</span> <span style="color:#7f8c8d;">[ Waiting for update... ]</span> Across genres, Classical music shows the widest spread and highest median!
                     </p>
                     <svg class="drawn-arrow" width="100" height="150" style="left: -50px; bottom: -80px;">
                         <path d="M 80 10 Q 20 80 10 140" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
