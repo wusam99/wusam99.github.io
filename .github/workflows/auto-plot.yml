@@ -1,6 +1,5 @@
 name: Auto-Generate R Plots
 
-# 触发条件：当你推送 generate_plots.R 或 Songs.csv 时，或者你可以手动点击运行
 on:
   push:
     paths:
@@ -10,7 +9,10 @@ on:
 
 jobs:
   build-plots:
-    runs-on: ubuntu-latest # 使用 GitHub 的 Ubuntu 服务器
+    runs-on: ubuntu-latest
+    # 给机器人授予写权限，解决上传报错
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout repository
@@ -19,27 +21,27 @@ jobs:
       - name: Setup R Environment
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: 'release' # 安装最新版 R
+          r-version: 'release'
+          # 使用官方预编译二进制包，安装速度会快 10 倍且更稳
+          use-public-rspm: true 
 
       - name: Install System Dependencies
-        # Tidyverse 需要的一些系统底层库
-        run: sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
 
       - name: Install R Packages
-        # 让 GitHub 自动帮你装画图需要的包
         run: |
-          Rscript -e 'install.packages(c("tidyverse", "mosaic", "RColorBrewer"), repos="https://cloud.r-project.org/")'
+          install.packages(c("tidyverse", "mosaic", "RColorBrewer"), repos="https://packagemanager.posit.co/cran/__linux__/jammy/latest")
+        shell: Rscript {0}
 
       - name: Run R Script
-        # 运行你的 R 脚本，生成 PNG 图片
         run: Rscript generate_plots.R
 
       - name: Commit and Push generated images
-        # 把画好的图片自动保存回你的 GitHub 仓库里
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action Bot"
           git add *.png
-          # 如果有新图片生成，就提交；如果没有变化，就跳过
           git commit -m "Auto-generated plots by GitHub Actions 🤖" || echo "No changes to commit"
           git push
