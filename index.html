@@ -20,17 +20,18 @@
             overflow-x: hidden;
         }
 
+        /* 加宽画幅，给图表和文字充足的呼吸空间 */
         .canvas {
-            max-width: 1150px; /* 稍微加宽一点画布，给放大的文字更多空间 */
+            max-width: 1250px; 
             margin: 0 auto;
             position: relative;
         }
 
-        /* --- 纯 CSS 黑胶唱片 (复古深色水印透印版) --- */
+        /* --- 纯 CSS 黑胶唱片 (复古深色水印) --- */
         .vinyl-record {
             position: absolute;
             top: -70px;
-            right: -150px;
+            right: -100px;
             width: 600px;
             height: 600px;
             background: repeating-radial-gradient(
@@ -77,27 +78,27 @@
             margin-top: -10px;
         }
 
-        /* --- 图文融合核心逻辑 --- */
+        /* --- 图文排版逻辑：移除相互覆盖，改为安全距离并排 --- */
         .collage-section {
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            gap: 40px; /* 图表和文字之间的安全鸿沟 */
             position: relative;
             margin-bottom: 90px;
             z-index: 5; 
         }
         
-        .collage-section:nth-child(odd) .doodle-img { width: 60%; }
+        .collage-section:nth-child(odd) .doodle-img { width: 55%; }
         .collage-section:nth-child(odd) .doodle-text { 
-            width: 50%; /* 给文字更多宽度 */
-            margin-left: -10%; /* 减少重叠，防拥挤 */
+            width: 45%; 
             z-index: 10;
         }
         
         .collage-section:nth-child(even) { flex-direction: row-reverse; }
-        .collage-section:nth-child(even) .doodle-img { width: 60%; }
+        .collage-section:nth-child(even) .doodle-img { width: 55%; }
         .collage-section:nth-child(even) .doodle-text { 
-            width: 50%; 
-            margin-right: -10%; 
+            width: 45%; 
             z-index: 10;
             text-align: right;
         }
@@ -109,15 +110,14 @@
             mix-blend-mode: multiply;
         }
 
-        /* --- 文字段落升级：更大、更清晰、带描边 --- */
+        /* --- 文字段落：保留大字号和护眼描边 --- */
         .story-text {
-            font-size: 2.1em; /* 字号显著放大 */
+            font-size: 2.1em; 
             line-height: 1.35;
             color: #1e272e; 
             margin-bottom: 20px;
-            font-weight: 700; /* 加粗 */
+            font-weight: 700; 
             letter-spacing: 0.5px;
-            /* 纸张颜色描边魔法：让文字压在图片线上也极其清晰！ */
             text-shadow: 
                 2px 2px 0px #f4f1ea, 
                 -2px -2px 0px #f4f1ea, 
@@ -133,7 +133,7 @@
             padding: 0 5px;
         }
 
-        /* --- 手写碎纸片 --- */
+        /* --- 手写碎纸片表格 --- */
         .data-scrap {
             background-color: white;
             padding: 15px 25px;
@@ -143,13 +143,14 @@
             border-radius: 2px 15px 3px 25px / 25px 3px 15px 2px;
             display: inline-block;
             transform: rotate(-2deg);
+            margin-top: 10px; /* 留出一点顶部距离 */
         }
         .data-scrap.tilt-right { transform: rotate(2deg); }
         
         .data-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            column-gap: 20px;
+            column-gap: 30px;
             row-gap: 5px;
             text-align: left;
         }
@@ -176,7 +177,7 @@
                 <img src="plot1_histogram.png" alt="Histogram">
             </div>
             
-            <div class="doodle-text" style="margin-top: -60px;">
+            <div class="doodle-text">
                 <p class="story-text">
                     <span class="highlight-red">1.</span> The song duration distribution is <span class="highlight">right-skewed</span>, centered around 4-5 minutes, with moderate spread and several high-end outliers.
                 </p>
@@ -187,21 +188,21 @@
                     <span class="highlight-red">3.</span> The Empirical Rule <span class="highlight">fails</span>: observed proportions within 1, 2, and 3 SDs miss 68-95-99.7%, confirming the right-skewed shape.
                 </p>
                 
-                <svg class="drawn-arrow" width="120" height="80" style="left: -100px; top: 80px;">
-                    <path d="M 100 10 Q 20 20 10 70" fill="none" stroke="#e74c3c" stroke-width="4" stroke-linecap="round"/>
-                    <path d="M 10 70 L 5 50 M 10 70 L 30 65" fill="none" stroke="#e74c3c" stroke-width="4" stroke-linecap="round"/>
+                <svg class="drawn-arrow" width="100" height="60" style="left: -40px; top: 180px;">
+                    <path d="M 80 10 Q 20 20 10 50" fill="none" stroke="#e74c3c" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M 10 50 L 5 30 M 10 50 L 30 45" fill="none" stroke="#e74c3c" stroke-width="4" stroke-linecap="round"/>
                 </svg>
 
                 <div class="data-scrap">
                     <div style="font-weight: bold; margin-bottom: 5px; border-bottom: 2px dashed #bdc3c7;">2&3. Summary Stats (mins)</div>
                     <div class="data-grid">
-                        <div>Min: <span>0.38</span></div>
-                        <div>Max: <span>9.47</span></div>
-                        <div>Q1: <span>3.13</span></div>
+                        <div>Min: <span>1.15</span></div>
+                        <div>Max: <span>13.38</span></div>
+                        <div>Q1: <span>3.32</span></div>
                         <div>Mean: <span style="color:#2980b9;">3.97</span></div>
-                        <div>Median: <span>3.82</span></div>
+                        <div>Median: <span>3.78</span></div>
                         <div>SD: <span>1.26</span></div>
-                        <div>Q3: <span>4.66</span></div>
+                        <div>Q3: <span>4.37</span></div>
                         <div>n: <span>392</span></div>
                     </div>
                 </div>
@@ -213,19 +214,19 @@
                 <img src="plot2_boxplot.png" alt="Boxplot">
             </div>
             
-            <div class="doodle-text" style="margin-top: -50px;">
+            <div class="doodle-text">
                 <p class="story-text">
-                    <span class="highlight-red">4.</span> <span style="color:#7f8c8d;">[ Waiting for update... ]</span> Wait, look at these high-end outliers! The longest track reaches a whopping 9.47 minutes.
+                    <span class="highlight-red">4.</span> <span style="color:#7f8c8d;">[ Waiting for update... ]</span> Wait, look at these high-end outliers! The longest track reaches a whopping 13.38 minutes.
                 </p>
 
-                <svg class="drawn-arrow" width="150" height="100" style="right: -80px; top: 40px;">
-                    <path d="M 10 20 Q 80 10 130 80" fill="none" stroke="#2980b9" stroke-width="4" stroke-linecap="round"/>
-                    <path d="M 130 80 L 110 70 M 130 80 L 135 60" fill="none" stroke="#2980b9" stroke-width="4" stroke-linecap="round"/>
+                <svg class="drawn-arrow" width="120" height="80" style="right: -40px; top: 80px;">
+                    <path d="M 10 20 Q 60 10 100 70" fill="none" stroke="#2980b9" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M 100 70 L 80 60 M 100 70 L 105 50" fill="none" stroke="#2980b9" stroke-width="4" stroke-linecap="round"/>
                 </svg>
             </div>
         </div>
 
-        <div class="collage-section" style="margin-top: -30px;">
+        <div class="collage-section">
             <div class="doodle-img">
                 <img src="plot3_barplot.png" alt="Bar Plot">
             </div>
@@ -244,22 +245,22 @@
                     Indie: <span>32 (8%)</span><br>
                     HipHop: <span>29 (7%)</span><br>
                     Class.: <span>19 (5%)</span><br>
-                    Rap: <span>3 (0.7%)</span>
+                    Rap: <span>3 (0.8%)</span>
                 </div>
             </div>
         </div>
 
-        <div style="position: relative; margin-top: 40px; text-align: center; z-index: 10;">
-            <div style="display: inline-block; width: 70%; position: relative;">
+        <div style="position: relative; margin-top: 40px; margin-bottom: 80px; text-align: center; z-index: 10;">
+            <div style="display: inline-block; width: 65%; position: relative;">
                 <img src="plot4_boxplot_genre.png" alt="Boxplot by Genre" style="width: 100%; filter: drop-shadow(3px 5px 4px rgba(0,0,0,0.15)); mix-blend-mode: multiply;">
                 
-                <div style="position: absolute; top: 5%; right: -25%; width: 45%; text-align: left; transform: rotate(2deg);">
+                <div style="position: absolute; top: 10%; right: -35%; width: 50%; text-align: left; transform: rotate(2deg);">
                     <p class="story-text">
                         <span class="highlight-red">6.</span> <span style="color:#7f8c8d;">[ Waiting for update... ]</span> Across genres, Classical music shows the widest spread and highest median!
                     </p>
-                    <svg class="drawn-arrow" width="100" height="150" style="left: -50px; bottom: -80px;">
-                        <path d="M 80 10 Q 20 80 10 140" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
-                        <path d="M 10 140 L 0 120 M 10 140 L 30 130" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
+                    <svg class="drawn-arrow" width="80" height="120" style="left: -40px; bottom: -60px;">
+                        <path d="M 60 10 Q 20 60 10 110" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M 10 110 L 0 90 M 10 110 L 30 100" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
                     </svg>
                 </div>
             </div>
