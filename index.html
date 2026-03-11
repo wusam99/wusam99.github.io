@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Rhythm of Data - Freeform Infographic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <style>
+        /* --- 画布背景：粗糙的米色画纸 --- */
+        body {
+            background-color: #f4f1ea; 
+            background-image: 
+                linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            font-family: 'Caveat', cursive;
+            color: #2c3e50;
+            margin: 0;
+            padding: 20px 0 100px 0;
+            overflow-x: hidden;
+        }
+
+        .canvas {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* --- 纯 CSS 黑胶唱片 (复古深色水印透印版) --- */
+        .vinyl-record {
+            position: absolute;
+            top: -70px;
+            right: -150px;
+            width: 600px;
+            height: 600px;
+            /* 恢复黑胶的深灰黑色，但降低透明度，作为背景底纹 */
+            background: repeating-radial-gradient(
+                rgba(30, 39, 46, 0.12),
+                rgba(30, 39, 46, 0.12) 8px,
+                rgba(30, 39, 46, 0.22) 9px,
+                rgba(30, 39, 46, 0.22) 18px
+            );
+            border-radius: 50%;
+            z-index: 0; 
+            mix-blend-mode: multiply; /* 叠底魔法：让黑色文字在它上面依然清晰锐利 */
+        }
+        .vinyl-center {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px; height: 180px;
+            /* 恢复深红色的中心，使用半透明让文字透出来 */
+            background-color: rgba(231, 76, 60, 0.45); 
+            border-radius: 50%;
+            border: 8px solid rgba(244, 241, 234, 0.5); /* 融入画纸的边框 */
+        }
+
+        /* --- 标题区 --- */
+        .header-area {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 10;
+        }
+        h1 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 6em;
+            color: #1e272e;
+            transform: rotate(-3deg);
+            margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 5px 5px 0px rgba(255, 71, 87, 0.3);
+        }
+        .authors {
+            font-size: 1.8em;
+            color: #c0392b;
+            font-weight: bold;
+            transform: rotate(2deg);
+            margin-top: -10px;
+        }
+
+        /* --- 图文融合核心逻辑 --- */
+        .collage-section {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-bottom: 80px;
+            z-index: 5; 
+        }
+        
+        .collage-section:nth-child(odd) .doodle-img { width: 65%; }
+        .collage-section:nth-child(odd) .doodle-text { 
+            width: 45%; 
+            margin-left: -15%; 
+            z-index: 10;
+        }
+        
+        .collage-section:nth-child(even) { flex-direction: row-reverse; }
+        .collage-section:nth-child(even) .doodle-img { width: 65%; }
+        .collage-section:nth-child(even) .doodle-text { 
+            width: 45%; 
+            margin-right: -10%; 
+            z-index: 10;
+            text-align: right;
+        }
+
+        .doodle-img img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(3px 5px 4px rgba(0,0,0,0.15));
+            mix-blend-mode: multiply;
+        }
+
+        /* --- 文字段落与便签样式 --- */
+        .story-text {
+            font-size: 1.8em;
+            line-height: 1.3;
+            color: #1e272e; /* 极深的文字色，确保在深色唱片上也能看清 */
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .highlight {
+            background: linear-gradient(180deg, transparent 60%, rgba(255, 234, 167, 0.9) 60%);
+            padding: 0 5px;
+        }
+        .highlight-red {
+            background: linear-gradient(180deg, transparent 60%, rgba(255, 118, 117, 0.6) 60%);
+            padding: 0 5px;
+        }
+
+        /* --- 手写碎纸片 --- */
+        .data-scrap {
+            background-color: white;
+            padding: 15px 25px;
+            font-size: 1.4em;
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
+            border: 2px solid #2f3640;
+            border-radius: 2px 15px 3px 25px / 25px 3px 15px 2px;
+            display: inline-block;
+            transform: rotate(-2deg);
+        }
+        .data-scrap.tilt-right { transform: rotate(2deg); }
+        
+        .data-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 20px;
+            row-gap: 5px;
+            text-align: left;
+        }
+        .data-grid span { font-family: 'Permanent Marker', cursive; color: #e74c3c; font-size: 1.1em; }
+
+        .drawn-arrow { position: absolute; z-index: 10; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="canvas">
+        
+        <div class="vinyl-record">
+            <div class="vinyl-center"></div>
+        </div>
+
+        <div class="header-area">
+            <h1>The Rhythm Of Data</h1>
+            <div class="authors">Data Investigated by Yihang, Yiheng, Yiming & Yuyang</div>
+        </div>
+
+        <div class="collage-section">
+            <div class="doodle-img">
+                <img src="plot1_histogram.png" alt="Histogram">
+            </div>
+            
+            <div class="doodle-text" style="margin-top: -80px;">
+                <p class="story-text">
+                    1. Most songs hit the 3-4 minute mark. The distribution is heavily <span class="highlight-red">right-skewed</span>. 
+                    Because of this skewness, the Empirical Rule <strong>does not strictly hold</strong>!
+                </p>
+                
+                <svg class="drawn-arrow" width="120" height="80" style="left: -80px; top: -10px;">
+                    <path d="M 100 10 Q 20 20 10 70" fill="none" stroke="#e74c3c" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M 10 70 L 5 50 M 10 70 L 30 65" fill="none" stroke="#e74c3c" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+
+                <div class="data-scrap">
+                    <div style="font-weight: bold; margin-bottom: 5px; border-bottom: 2px dashed #bdc3c7;">2&3. Summary Stats (mins)</div>
+                    <div class="data-grid">
+                        <div>Min: <span>0.38</span></div>
+                        <div>Max: <span>9.47</span></div>
+                        <div>Q1: <span>3.13</span></div>
+                        <div>Mean: <span style="color:#2980b9;">3.97</span></div>
+                        <div>Median: <span>3.82</span></div>
+                        <div>SD: <span>1.26</span></div>
+                        <div>Q3: <span>4.66</span></div>
+                        <div>n: <span>392</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="collage-section">
+            <div class="doodle-img">
+                <img src="plot2_boxplot.png" alt="Boxplot">
+            </div>
+            
+            <div class="doodle-text" style="margin-top: -50px;">
+                <p class="story-text">
+                    4. Wait, look at these <span class="highlight">high-end outliers!</span> 
+                    The longest track reaches a whopping 9.47 minutes.
+                </p>
+
+                <svg class="drawn-arrow" width="150" height="100" style="right: -80px; top: 40px;">
+                    <path d="M 10 20 Q 80 10 130 80" fill="none" stroke="#2980b9" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M 130 80 L 110 70 M 130 80 L 135 60" fill="none" stroke="#2980b9" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="collage-section" style="margin-top: -30px;">
+            <div class="doodle-img">
+                <img src="plot3_barplot.png" alt="Bar Plot">
+            </div>
+            
+            <div class="doodle-text">
+                <p class="story-text">
+                    5. <span class="highlight-red">Pop completely dominates</span> the dataset at 37%, 
+                    while Rap barely registers (0.7%).
+                </p>
+
+                <div class="data-scrap tilt-right" style="font-size: 1.2em; column-count: 2; column-gap: 30px;">
+                    <div style="font-weight: bold; border-bottom: 2px dashed #bdc3c7; margin-bottom: 5px; column-span: all;">5a. Genre Freq.</div>
+                    Pop: <span>145 (37%)</span><br>
+                    Other: <span>79 (20%)</span><br>
+                    R&B: <span>43 (11%)</span><br>
+                    Rock: <span>42 (10%)</span><br>
+                    Indie: <span>32 (8%)</span><br>
+                    HipHop: <span>29 (7%)</span><br>
+                    Class.: <span>19 (5%)</span><br>
+                    Rap: <span>3 (0.7%)</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="position: relative; margin-top: 40px; text-align: center; z-index: 10;">
+            <div style="display: inline-block; width: 70%; position: relative;">
+                <img src="plot4_boxplot_genre.png" alt="Boxplot by Genre" style="width: 100%; filter: drop-shadow(3px 5px 4px rgba(0,0,0,0.15)); mix-blend-mode: multiply;">
+                
+                <div style="position: absolute; top: 5%; right: -15%; width: 40%; text-align: left; transform: rotate(2deg);">
+                    <p class="story-text">
+                        6. Across genres, <span class="highlight">Classical music</span> shows the widest spread and highest median, whereas Pop & Rap are tightly packaged!
+                    </p>
+                    <svg class="drawn-arrow" width="100" height="150" style="left: -50px; bottom: -80px;">
+                        <path d="M 80 10 Q 20 80 10 140" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M 10 140 L 0 120 M 10 140 L 30 130" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
