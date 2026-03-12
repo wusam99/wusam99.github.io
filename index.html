@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Investigations of Songs - Freeform Infographic</title>
+    <title>SONGS - Freeform Infographic</title>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
         /* --- 画布背景：粗糙的米色画纸 --- */
@@ -64,21 +64,19 @@
         }
         h1 {
             font-family: 'Permanent Marker', cursive;
-            font-size: 6.5em; /* 调整为多字适用的巨大字号 */
-            line-height: 1.1; /* 收紧行距形成图章感 */
+            font-size: 11em; 
             color: #1e272e;
             transform: rotate(-3deg);
             margin: 0;
-            letter-spacing: 2px; 
-            text-shadow: 6px 6px 0px rgba(255, 71, 87, 0.3);
-            text-transform: uppercase;
+            letter-spacing: 8px; 
+            text-shadow: 8px 8px 0px rgba(255, 71, 87, 0.3);
         }
         .authors {
             font-size: 2.2em; 
             color: #c0392b;
             font-weight: bold;
             transform: rotate(2deg);
-            margin-top: 5px; 
+            margin-top: -20px; 
         }
 
         /* --- 图文排版逻辑 --- */
@@ -174,7 +172,7 @@
         </div>
 
         <div class="header-area">
-            <h1>Data Investigations<br>Of Songs</h1>
+            <h1>SONGS</h1>
             <div class="authors">Data Investigated by Yihang Wu, Yiheng Li, Yiming Wang & Yuyang Wu</div>
         </div>
 
@@ -185,13 +183,13 @@
             
             <div class="doodle-text">
                 <p class="story-text">
-                    <span class="highlight-red">1.</span> The histogram is <span class="highlight">right-skewed</span>, centred around 4–5 minutes, with moderate spread and several high-end outliers.
+                    <span class="highlight-red">1.</span> Song durations show a <span class="highlight">right-skewed</span> distribution, centered near 4 minutes (typical duration), with a 12.23-minute range.
                 </p>
                 <p class="story-text">
-                    <span class="highlight-red">2.</span> The average song duration is 3.97 minutes. Song lengths typically deviate from this mean by about 1.26 minutes.
+                    <span class="highlight-red">2.</span> The 3.97-minute mean is the average song duration. On average, song durations differ from this mean by the 1.26-minute standard deviation.
                 </p>
                 <p class="story-text">
-                    <span class="highlight-red">3.</span> The Empirical Rule <span class="highlight">fails</span>: observed song proportions within 1, 2, and 3 standard deviations miss 68-95-99.7%, confirming the right-skewed shape.
+                    <span class="highlight-red">3.</span> This right-skewness causes the dataset to <span class="highlight">fail</span> the Empirical Rule, as observed proportions miss the expected 68%, 95%, and 99.7%.
                 </p>
                 
                 <svg class="drawn-arrow" width="120" height="80" style="left: -100px; top: 160px;">
@@ -222,7 +220,7 @@
             
             <div class="doodle-text">
                 <p class="story-text">
-                    <span class="highlight-red">4.</span> This right-skewed song duration boxplot centers at a 3.78-minute median with uneven whiskers. Spread (IQR) identifies both susceptible (>1.5×IQR) and highly susceptible (<span class="highlight">>3×IQR</span>) outliers.
+                    <span class="highlight-red">4.</span> The boxplot confirms right-skewed song durations via a longer upper whisker above the 3.78-minute median centre, with a 1.05-minute IQR spread. Distant points beyond whiskers are outliers: classified by position as susceptible (1.5–3×IQR) or highly susceptible (<span class="highlight">>3×IQR</span>).
                 </p>
 
                 <svg class="drawn-arrow" width="140" height="100" style="right: -100px; top: 80px;">
@@ -239,7 +237,7 @@
             
             <div class="doodle-text">
                 <p class="story-text">
-                    <span class="highlight-red">5.</span> Pop <span class="highlight">heavily dominates</span> as the most common song genre (37%), while Rap is the least common, showing highly uneven frequencies.
+                    <span class="highlight-red">5.</span> Pop <span class="highlight">dominates</span> as the most common genre (37%), while Rap is the least common (0.8%), showing highly uneven popularity.
                 </p>
 
                 <div class="data-scrap tilt-right" style="column-count: 2; column-gap: 40px;">
@@ -262,7 +260,7 @@
                 
                 <div style="position: absolute; top: 15%; right: -40%; width: 50%; text-align: left; transform: rotate(2deg);">
                     <p class="story-text">
-                        <span class="highlight-red">6.</span> Most genre distributions are right-skewed. <span class="highlight">Classical and Rock</span> have the highest medians and widest spread (IQRs), while Rap is lowest.
+                        <span class="highlight-red">6.</span> Comparing genres, <span class="highlight">Classical</span> has the highest median duration, widest spread (IQR), and strongest right-skew. Rap shows the lowest median and narrowest spread.
                     </p>
                     <svg class="drawn-arrow" width="120" height="100" style="left: -100px; top: 30px;">
                         <path d="M 100 80 Q 50 80 10 10" fill="none" stroke="#27ae60" stroke-width="5" stroke-linecap="round"/>
