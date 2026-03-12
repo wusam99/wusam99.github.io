@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Rhythm of Data - Freeform Infographic</title>
+    <title>Behind The Songs - Freeform Infographic</title>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
         /* --- 画布背景：粗糙的米色画纸 --- */
@@ -20,21 +20,21 @@
             overflow-x: hidden;
         }
 
-        /* 极限加宽画幅 */
+        /* 史诗级加宽画幅，容纳超大文字 */
         .canvas {
-            max-width: 1400px; 
+            max-width: 1600px; 
             margin: 0 auto;
             position: relative;
-            padding: 0 40px;
+            padding: 0 60px;
         }
 
         /* --- 纯 CSS 黑胶唱片 (复古深色水印) --- */
         .vinyl-record {
             position: absolute;
-            top: -70px;
-            right: -50px;
-            width: 650px;
-            height: 650px;
+            top: -50px;
+            right: -20px;
+            width: 750px;
+            height: 750px;
             background: repeating-radial-gradient(
                 rgba(30, 39, 46, 0.12),
                 rgba(30, 39, 46, 0.12) 8px,
@@ -49,30 +49,30 @@
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 180px; height: 180px;
+            width: 220px; height: 220px;
             background-color: rgba(231, 76, 60, 0.45); 
             border-radius: 50%;
-            border: 8px solid rgba(244, 241, 234, 0.5); 
+            border: 10px solid rgba(244, 241, 234, 0.5); 
         }
 
         /* --- 标题区 --- */
         .header-area {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 100px;
             position: relative;
             z-index: 10;
         }
         h1 {
             font-family: 'Permanent Marker', cursive;
-            font-size: 6.5em; 
+            font-size: 8em; /* 标题史诗级放大 */
             color: #1e272e;
             transform: rotate(-3deg);
             margin: 0;
             letter-spacing: 2px;
-            text-shadow: 5px 5px 0px rgba(255, 71, 87, 0.3);
+            text-shadow: 6px 6px 0px rgba(255, 71, 87, 0.3);
         }
         .authors {
-            font-size: 1.8em;
+            font-size: 2.2em; /* 作者名字同步放大 */
             color: #c0392b;
             font-weight: bold;
             transform: rotate(2deg);
@@ -84,23 +84,23 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 60px; 
+            gap: 80px; 
             position: relative;
-            margin-bottom: 100px;
+            margin-bottom: 120px;
             z-index: 5; 
         }
         
-        .collage-section:nth-child(odd) .doodle-img { width: 50%; }
+        .collage-section:nth-child(odd) .doodle-img { width: 48%; }
         .collage-section:nth-child(odd) .doodle-text { 
-            width: 50%; 
+            width: 52%; 
             z-index: 10;
             position: relative; 
         }
         
         .collage-section:nth-child(even) { flex-direction: row-reverse; }
-        .collage-section:nth-child(even) .doodle-img { width: 50%; }
+        .collage-section:nth-child(even) .doodle-img { width: 48%; }
         .collage-section:nth-child(even) .doodle-text { 
-            width: 50%; 
+            width: 52%; 
             z-index: 10;
             text-align: right;
             position: relative; 
@@ -109,23 +109,24 @@
         .doodle-img img {
             width: 100%;
             height: auto;
-            filter: drop-shadow(3px 5px 4px rgba(0,0,0,0.15));
+            filter: drop-shadow(4px 6px 5px rgba(0,0,0,0.15));
             mix-blend-mode: multiply;
         }
 
-        /* --- 文字段落：极限大字号 --- */
+        /* --- 文字段落：史诗级大字号 --- */
         .story-text {
-            font-size: 2.5em; 
-            line-height: 1.4;
+            font-size: 3.2em; /* 巨无霸字号！ */
+            line-height: 1.3;
             color: #1e272e; 
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             font-weight: 700; 
             letter-spacing: 0.5px;
             text-shadow: 
                 2px 2px 0px #f4f1ea, 
                 -2px -2px 0px #f4f1ea, 
                 2px -2px 0px #f4f1ea, 
-                -2px 2px 0px #f4f1ea;
+                -2px 2px 0px #f4f1ea,
+                3px 3px 0px #f4f1ea; /* 加强边缘抗锯齿 */
         }
         .highlight {
             background: linear-gradient(180deg, transparent 55%, rgba(255, 234, 167, 0.95) 55%);
@@ -136,30 +137,31 @@
             padding: 0 5px;
         }
 
-        /* --- 手写碎纸片表格 --- */
+        /* --- 手写碎纸片表格：同步巨型化 --- */
         .data-scrap {
             background-color: white;
-            padding: 20px 30px;
-            font-size: 1.6em; 
-            box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
-            border: 2px solid #2f3640;
+            padding: 25px 40px;
+            font-size: 2.1em; /* 表格字号史诗级放大 */
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            border: 3px solid #2f3640;
             border-radius: 2px 15px 3px 25px / 25px 3px 15px 2px;
             display: inline-block;
             transform: rotate(-2deg);
-            margin-top: 10px;
+            margin-top: 15px;
         }
         .data-scrap.tilt-right { transform: rotate(2deg); }
         
         .data-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            column-gap: 40px;
-            row-gap: 8px;
+            column-gap: 50px;
+            row-gap: 10px;
             text-align: left;
         }
-        .data-grid span { font-family: 'Permanent Marker', cursive; color: #e74c3c; font-size: 1.1em; }
+        .data-grid span { font-family: 'Permanent Marker', cursive; color: #e74c3c; font-size: 1.2em; }
 
-        .drawn-arrow { position: absolute; z-index: 10; pointer-events: none; filter: drop-shadow(1px 1px 0px #f4f1ea); }
+        /* 箭头也稍微放大加粗一点点配合大字号 */
+        .drawn-arrow { position: absolute; z-index: 10; pointer-events: none; filter: drop-shadow(2px 2px 0px #f4f1ea); }
     </style>
 </head>
 <body>
@@ -171,7 +173,7 @@
         </div>
 
         <div class="header-area">
-            <h1>The Rhythm Of Data</h1>
+            <h1>Behind The Songs</h1>
             <div class="authors">Data Investigated by Yihang Wu, Yiheng Li, Yiming Wang & Yuyang Wu</div>
         </div>
 
@@ -191,13 +193,13 @@
                     <span class="highlight-red">3.</span> The Empirical Rule <span class="highlight">fails</span>: observed song proportions within 1, 2, and 3 standard deviations miss 68-95-99.7%, confirming the right-skewed shape.
                 </p>
                 
-                <svg class="drawn-arrow" width="100" height="60" style="left: -80px; top: 120px;">
-                    <path d="M 80 10 Q 20 20 10 50" fill="none" stroke="#e74c3c" stroke-width="4" stroke-linecap="round"/>
-                    <path d="M 10 50 L 5 30 M 10 50 L 30 45" fill="none" stroke="#e74c3c" stroke-width="4" stroke-linecap="round"/>
+                <svg class="drawn-arrow" width="120" height="80" style="left: -100px; top: 160px;">
+                    <path d="M 100 10 Q 20 20 10 70" fill="none" stroke="#e74c3c" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M 10 70 L 5 40 M 10 70 L 35 60" fill="none" stroke="#e74c3c" stroke-width="5" stroke-linecap="round"/>
                 </svg>
 
                 <div class="data-scrap">
-                    <div style="font-weight: bold; margin-bottom: 5px; border-bottom: 2px dashed #bdc3c7;">2&3. Summary Stats (mins)</div>
+                    <div style="font-weight: bold; margin-bottom: 5px; border-bottom: 3px dashed #bdc3c7;">2&3. Summary Stats (mins)</div>
                     <div class="data-grid">
                         <div>Min: <span>1.15</span></div>
                         <div>Max: <span>13.38</span></div>
@@ -222,9 +224,9 @@
                     <span class="highlight-red">4.</span> This right-skewed song duration boxplot centers at a 3.78-minute median with uneven whiskers. Spread (IQR) identifies both susceptible (>1.5×IQR) and highly susceptible (<span class="highlight">>3×IQR</span>) outliers.
                 </p>
 
-                <svg class="drawn-arrow" width="120" height="80" style="right: -80px; top: 60px;">
-                    <path d="M 10 20 Q 60 10 100 70" fill="none" stroke="#2980b9" stroke-width="4" stroke-linecap="round"/>
-                    <path d="M 100 70 L 80 60 M 100 70 L 105 50" fill="none" stroke="#2980b9" stroke-width="4" stroke-linecap="round"/>
+                <svg class="drawn-arrow" width="140" height="100" style="right: -100px; top: 80px;">
+                    <path d="M 10 20 Q 70 10 120 90" fill="none" stroke="#2980b9" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M 120 90 L 95 75 M 120 90 L 125 65" fill="none" stroke="#2980b9" stroke-width="5" stroke-linecap="round"/>
                 </svg>
             </div>
         </div>
@@ -239,8 +241,8 @@
                     <span class="highlight-red">5.</span> Pop <span class="highlight">heavily dominates</span> as the most common song genre (37%), while Rap is the least common, showing highly uneven frequencies.
                 </p>
 
-                <div class="data-scrap tilt-right" style="font-size: 1.4em; column-count: 2; column-gap: 30px;">
-                    <div style="font-weight: bold; border-bottom: 2px dashed #bdc3c7; margin-bottom: 5px; column-span: all;">5a. Genre Freq.</div>
+                <div class="data-scrap tilt-right" style="column-count: 2; column-gap: 40px;">
+                    <div style="font-weight: bold; border-bottom: 3px dashed #bdc3c7; margin-bottom: 10px; column-span: all;">5a. Genre Freq.</div>
                     Pop: <span>145 (37%)</span><br>
                     Other: <span>79 (20%)</span><br>
                     R&B: <span>43 (11%)</span><br>
@@ -253,17 +255,17 @@
             </div>
         </div>
 
-        <div style="position: relative; margin-top: 40px; margin-bottom: 80px; text-align: center; z-index: 10;">
+        <div style="position: relative; margin-top: 60px; margin-bottom: 120px; text-align: center; z-index: 10;">
             <div style="display: inline-block; width: 65%; position: relative;">
-                <img src="plot4_boxplot_genre.png" alt="Boxplot by Genre" style="width: 100%; filter: drop-shadow(3px 5px 4px rgba(0,0,0,0.15)); mix-blend-mode: multiply;">
+                <img src="plot4_boxplot_genre.png" alt="Boxplot by Genre" style="width: 100%; filter: drop-shadow(4px 6px 5px rgba(0,0,0,0.15)); mix-blend-mode: multiply;">
                 
-                <div style="position: absolute; top: 10%; right: -35%; width: 50%; text-align: left; transform: rotate(2deg);">
+                <div style="position: absolute; top: 15%; right: -40%; width: 50%; text-align: left; transform: rotate(2deg);">
                     <p class="story-text">
                         <span class="highlight-red">6.</span> Most genre distributions are right-skewed. <span class="highlight">Classical and Rock</span> have the highest medians and widest spread (IQRs), while Rap is lowest.
                     </p>
-                    <svg class="drawn-arrow" width="100" height="80" style="left: -80px; top: 20px;">
-                        <path d="M 80 60 Q 40 60 10 10" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
-                        <path d="M 10 10 L 15 30 M 10 10 L 30 15" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
+                    <svg class="drawn-arrow" width="120" height="100" style="left: -100px; top: 30px;">
+                        <path d="M 100 80 Q 50 80 10 10" fill="none" stroke="#27ae60" stroke-width="5" stroke-linecap="round"/>
+                        <path d="M 10 10 L 20 40 M 10 10 L 40 20" fill="none" stroke="#27ae60" stroke-width="5" stroke-linecap="round"/>
                     </svg>
                 </div>
             </div>
